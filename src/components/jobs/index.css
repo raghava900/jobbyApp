@@ -1,0 +1,24 @@
+.job-container {
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+}
+
+.main {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.main-1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-1 {
+  margin-top: 10px;
+}
+
+.failure-pic {
+  height: 400px;
+  width: 500px;
+}

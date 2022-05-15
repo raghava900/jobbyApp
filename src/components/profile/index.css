@@ -1,0 +1,14 @@
+.pro-1 {
+  height: 190px;
+  width: 210px;
+  border-radius: 10px;
+  background-image: url('https://assets.ccbp.in/frontend/react-js/profile-bg.png');
+  background-size: cover;
+}
+
+.profile-heading {
+  font-family: 'Roboto';
+  font-size: 20px;
+  font-weight: 400;
+  color: yellow;
+}
