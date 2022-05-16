@@ -8,6 +8,8 @@ import Home from './components/home'
 
 import Jobs from './components/jobs'
 
+import JobItemDetails from './components/jobItemDetails'
+
 import './App.css'
 
 const App = () => (
@@ -15,6 +17,7 @@ const App = () => (
     <Route exact path="/login" component={Login} />
     <ProtectedRoute exact path="/" component={Home} />
     <ProtectedRoute exact path="/jobs" component={Jobs} />
+    <ProtectedRoute exact path="/jobs/:id" component={JobItemDetails} />
   </Switch>
 )
 
