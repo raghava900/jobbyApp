@@ -22,12 +22,14 @@ class Pro extends Component {
     if (response.ok === true) {
       const fetchedData = await response.json()
       console.log(fetchedData)
-      const updatedData = fetchedData.profile_details.map(pink => ({
-        profileImagUrl: pink.profile_image_url,
-        name: pink.name,
-        shortBio: pink.short_bio,
-      }))
+      //   const updatedData = fetchedData.profile_details.map(pink => ({
+      //     profileImageUrl: pink.profile_image_url,
+      //     name: pink.name,
+      //     shortBio: pink.short_bio,
+      //   }))
+      const updatedData = fetchedData.profile_details
       this.setState({profileArray: updatedData})
+      console.log(updatedData)
     }
   }
 
@@ -35,9 +37,8 @@ class Pro extends Component {
     const {profileArray} = this.state
     return (
       <div className="pro-1">
-        {profileArray.map(each => (
-          <Profile key={each.id} product={each} />
-        ))}
+        {/* {profileArray.map(each => <Profile key={each.id} product={each} />)} */}
+        <Profile product={profileArray} />
       </div>
     )
   }

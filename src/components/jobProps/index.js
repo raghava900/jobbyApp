@@ -19,7 +19,7 @@ const JobProps = props => {
   return (
     <div className="job-22">
       <div className="job-1">
-        <img src={companyLogoUrl} alt={title} className="icon" />
+        <img src={companyLogoUrl} alt="company logo" className="icon" />
         <div>
           <h1 className="job-title">{title}</h1>
           <p className="job-rating">
@@ -43,6 +43,7 @@ const JobProps = props => {
       </div>
 
       <hr className="line" />
+      <h1 className="job-title">Description</h1>
       <p className="job-rating">{jobDescription}</p>
     </div>
   )
