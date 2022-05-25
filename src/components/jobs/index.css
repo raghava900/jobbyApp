@@ -2,9 +2,6 @@
   height: 100vh;
   width: 100vw;
   background-color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .main {
@@ -45,4 +42,20 @@
   width: 90px;
   background-color: #4f46e5;
   color: white;
+}
+
+.employment {
+  display: flex;
+  flex-direction: column;
+}
+
+.employment-1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.jobs-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

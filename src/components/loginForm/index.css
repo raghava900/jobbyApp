@@ -8,16 +8,25 @@
   align-items: center;
 }
 
-.login-container {
+.login-container-1 {
   height: 290px;
   width: 330px;
   border-radius: 6px;
   background-color: #272727;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.icon {
+.login-container {
+  height: 290px;
+  width: 330px;
+  border-radius: 6px;
+  background-color: #272727;
+}
+
+.icon-1 {
   height: 40px;
   width: 100px;
 }
@@ -25,8 +34,10 @@
 .logo {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   margin-top: 3px;
+  margin-left: 130px;
 }
 
 .text {
@@ -34,21 +45,26 @@
   font-size: 11px;
   color: white;
   font-weight: 600;
-  margin: 10px;
+  margin: 20px;
 }
 
 .input {
   height: 30px;
-  width: 280px;
-  margin: 4px;
+  width: 310px;
+  margin: 10px;
 }
 
 .btn {
   height: 30px;
   width: 200px;
-  margin: 10px;
+  margin-left: 60px;
+  margin-top: 20px;
   color: white;
   border-width: 0px;
   border-radius: 5px;
   background-color: #6366f1;
+}
+
+.error {
+  color: red;
 }

@@ -1,5 +1,4 @@
 import {Component} from 'react'
-import {BsSearch} from 'react-icons/bs'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import Header from '../header'
@@ -137,53 +136,96 @@ class Jobs extends Component {
   }
 
   render() {
-    const {searchInput} = this.state
+    const {jobList} = this.state
     return (
       <div className="job-container">
         <Header />
-        <div className="main">
+        <div className="jobs-main">
           <div className="main-1">
             <Pro />
             <hr className="line" />
-            <div>
-              <h1 className="job-title">Type of Employment</h1>
-              <input type="checkbox" id="full time" value="checkbox1" />
-              <label htmlFor="full time" className="job-rating">
-                Full Time
-              </label>
-              <input type="checkbox" id="part time" value="checkbox2" />
-              <label htmlFor="part time" className="job-rating">
-                Part Time
-              </label>
-              <input type="checkbox" id="Freelance" value="checkbox3" />
-              <label htmlFor="Freelance" className="job-rating">
-                Freelance
-              </label>
-              <input type="checkbox" id="internship" value="checkbox4" />
-              <label htmlFor="internship" className="job-rating">
-                Internship
-              </label>
-            </div>
+            <ul>
+              <li>
+                <h1 className="job-title">Type of Employment</h1>
+                <input type="checkbox" id="full time" value="checkbox1" />
+                <label htmlFor="full time" className="job-rating">
+                  Full Time
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="part time" value="checkbox2" />
+                <label htmlFor="part time" className="job-rating">
+                  Part Time
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="Freelance" value="checkbox3" />
+                <label htmlFor="Freelance" className="job-rating">
+                  Freelance
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="internship" value="checkbox4" />
+                <label htmlFor="internship" className="job-rating">
+                  Internship
+                </label>
+              </li>
+            </ul>
             <hr className="line" />
-            <div>
+            <ul>
               <h1 className="job-title">Salary Range</h1>
-              <input type="radio" id="10LPA" name="salary" value="package10" />
-              <label htmlFor="10LPA" className="job-rating">
-                10LPA and above
-              </label>
-              <input type="radio" id="20LPA" name="salary" value="package20" />
-              <label htmlFor="20LPA" className="job-rating">
-                20LPA and above
-              </label>
-              <input type="radio" id="30LPA" name="salary" value="package30" />
-              <label htmlFor="30LPA" className="job-rating">
-                30LPA and above
-              </label>
-              <input type="radio" id="40LPA" name="salary" value="package40" />
-              <label htmlFor="40LPA" className="job-rating">
-                40LPA and above
-              </label>
-            </div>
+              <li>
+                <input
+                  type="radio"
+                  id="10LPA"
+                  name="salary"
+                  value="package10"
+                />
+                <label htmlFor="10LPA" className="job-rating">
+                  10LPA and above
+                </label>
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  id="20LPA"
+                  name="salary"
+                  value="package20"
+                />
+                <label htmlFor="20LPA" className="job-rating">
+                  20LPA and above
+                </label>
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  id="30LPA"
+                  name="salary"
+                  value="package30"
+                />
+                <label htmlFor="30LPA" className="job-rating">
+                  30LPA and above
+                </label>
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  id="40LPA"
+                  name="salary"
+                  value="package40"
+                />
+                <label htmlFor="40LPA" className="job-rating">
+                  40LPA and above
+                </label>
+              </li>
+            </ul>
+          </div>
+          <div className="employment">
+            <ul>
+              {jobList.map(item => (
+                <JobProps key={item.id} jobDetails={item} />
+              ))}
+            </ul>
           </div>
         </div>
       </div>

@@ -59,7 +59,7 @@ class Login extends Component {
               <img
                 src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
                 alt="website logo"
-                className="icon"
+                className="icon-1"
               />
             </div>
             <label htmlFor="username" className="text">
@@ -87,7 +87,7 @@ class Login extends Component {
             <button type="submit" className="btn">
               Login
             </button>
-            {showErrorMsg && <p>*{errorMsg}</p>}
+            {showErrorMsg && <p className="error">*{errorMsg}</p>}
           </form>
         </div>
       </div>

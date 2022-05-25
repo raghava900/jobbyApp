@@ -17,7 +17,7 @@ const JobDetails = props => {
   } = job
 
   return (
-    <div>
+    <div className="details">
       <div className="job-223">
         <div className="job-1">
           <img

@@ -13,7 +13,7 @@ const Home = () => {
   }
   return (
     <div className="home-container-1">
-      <Link to="/">
+      <Link to="/" className="list-2">
         <div className="bg-img">
           <Header />
           <ul className="list-2">

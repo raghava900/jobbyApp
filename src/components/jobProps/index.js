@@ -19,7 +19,7 @@ const JobProps = props => {
   } = jobDetails
 
   return (
-    <Link to={`/jobs/${id}`}>
+    <Link to={`/jobs/${id}`} className="text-dec">
       <div className="job-22">
         <div className="job-1">
           <img src={companyLogoUrl} alt="company logo" className="icon" />
