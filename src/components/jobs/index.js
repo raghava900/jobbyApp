@@ -136,7 +136,10 @@ class Jobs extends Component {
   }
 
   render() {
-    const {jobList} = this.state
+    const {searchInput, jobList} = this.state
+    const searchResult = jobList.filter(each =>
+      each.title.toLowerCase().includes(searchInput.toLowerCase()),
+    )
     return (
       <div className="job-container">
         <Header />
@@ -221,8 +224,14 @@ class Jobs extends Component {
             </ul>
           </div>
           <div className="employment">
+            <input
+              type="search"
+              placeholder="search"
+              onChange={this.onChangeInput}
+              className="search-icon"
+            />
             <ul>
-              {jobList.map(item => (
+              {searchResult.map(item => (
                 <JobProps key={item.id} jobDetails={item} />
               ))}
             </ul>
