@@ -1,0 +1,59 @@
+.logo {
+  height: 50px;
+  width: 50px;
+}
+
+
+.job-1 {
+  display: flex;
+}
+
+.job-223 {
+  height: 680px;
+  width: 600px;
+  background-color: #272727;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.job-33 {
+  display: flex;
+}
+
+.icon {
+  height: 50px;
+  width: 50px;
+  margin: 10px;
+}
+
+.job-title {
+  font-family: 'Roboto';
+  font-size: 16px;
+  color: white;
+  font-weight: 500;
+  margin: 10px;
+}
+
+.job-rating {
+  color: white;
+  margin: 10px;
+}
+
+.star {
+  color: #fbbf24;
+}
+.line {
+  width: 90%;
+  background-color: #b6c5ff;
+}
+
+.job-44 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.job-item-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

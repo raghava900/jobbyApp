@@ -13,11 +13,13 @@ const Header = props => {
 
   return (
     <div className="header-container-1">
-      <img
-        src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
-        alt="website logo"
-        className="icon-1"
-      />
+      <Link to="/">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
+          alt="website logo"
+          className="icon-1"
+        />
+      </Link>
       <ul className="list">
         <Link to="/">
           <li>

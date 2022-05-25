@@ -1,3 +1,13 @@
+.heading-job {
+  color: Red;
+}
+
+.job-details {
+  height: 800px;
+  width: 500px;
+  background-color: #272727;
+}
+
 .job-heading-1 {
   font-size: 40px;
   color: white;

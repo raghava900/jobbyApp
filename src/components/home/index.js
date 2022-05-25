@@ -14,11 +14,10 @@ const Home = () => {
   return (
     <div className="home-container-1">
       <Link to="/">
-        <Header />
         <div className="bg-img">
+          <Header />
           <ul className="list-2">
             <li>
-              {' '}
               <h1 className="text-1">Find The Job That Fits Your Life</h1>
             </li>
             <li>
@@ -29,16 +28,12 @@ const Home = () => {
                 abilities and potential
               </p>
             </li>
-
-            <Link to="/jobs">
-              <li>
-                <button type="button" className="btn">
-                  {' '}
-                  Find Jobs
-                </button>
-              </li>
-            </Link>
           </ul>
+          <Link to="/jobs">
+            <button type="button" className="btn">
+              Find Jobs
+            </button>
+          </Link>
         </div>
       </Link>
     </div>

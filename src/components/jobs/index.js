@@ -1,9 +1,10 @@
 import {Component} from 'react'
+import {BsSearch} from 'react-icons/bs'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import Header from '../header'
-import JobProps from '../jobProps'
 import Pro from '../pro'
+import JobProps from '../jobProps'
 import './index.css'
 
 const apiStatusConstants = {
@@ -14,7 +15,11 @@ const apiStatusConstants = {
 }
 
 class Jobs extends Component {
-  state = {apiStatus: apiStatusConstants.initial, jobList: [], searchInput: ''}
+  state = {
+    apiStatus: apiStatusConstants.initial[0],
+    jobList: [],
+    searchInput: '',
+  }
 
   componentDidMount() {
     this.getJobsList()
@@ -25,8 +30,7 @@ class Jobs extends Component {
   }
 
   getJobsList = async () => {
-    this.setState({apiStatus: apiStatusConstants.in_progress})
-
+    this.setState({apiStatus: apiStatusConstants.inProgress})
     const jwtTokenJob = Cookies.get('jwt_token')
     const jobsApiUrl = 'https://apis.ccbp.in/jobs'
     const options = {
@@ -39,6 +43,7 @@ class Jobs extends Component {
     if (response.ok === true) {
       const data = await response.json()
       const updatedData = data.jobs.map(each => ({
+        id: each.id,
         title: each.title,
         companyLogoUrl: each.company_logo_url,
         employmentType: each.employment_type,
@@ -51,22 +56,30 @@ class Jobs extends Component {
         jobList: updatedData,
         apiStatus: apiStatusConstants.success,
       })
-    }
-    if (response.status === 401) {
+    } else {
       this.setState({apiStatus: apiStatusConstants.failure})
     }
   }
 
   renderFailureView = () => (
-    <img
-      src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
-      alt="failure view"
-      className="failure-pic"
-    />
+    <div className="job-container">
+      <img
+        src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+        alt="failure view"
+        className="failure-pic"
+      />
+      <h1 className="job-heading-1">Oops! Something Went Wrong</h1>
+      <p className="job-subheading">
+        We cannot seem to find the page you are looking for
+      </p>
+      <button type="button" className="bon" onClick={() => this.getJobsList()}>
+        Retry
+      </button>
+    </div>
   )
 
   renderLoaderView = () => (
-    <div className="job-container" testid="loader">
+    <div className="job-container" testId="loader">
       <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
     </div>
   )
@@ -76,71 +89,39 @@ class Jobs extends Component {
     const searchResult = jobList.filter(each =>
       each.title.toLowerCase().includes(searchInput.toLowerCase()),
     )
-    return (
+    const noJobs = searchResult.length > 0
+
+    return noJobs ? (
       <div className="job-container">
-        <Header />
-        <div className="main">
-          <div className="main-1">
-            <Pro />
-            <hr className="line" />
-            <h1 className="job-title">Type of Employment</h1>
-            <input type="checkbox" id="full time" value="label" />
-            <label htmlFor="full time" className="job-rating" value="label">
-              Full Time
-            </label>
-            <input type="checkbox" id="part time" value="label" />
-            <label htmlFor="full time" className="job-rating">
-              Part Time
-            </label>
-            <input type="checkbox" id="Freelance" value="label" />
-            <label htmlFor="full time" className="job-rating">
-              Freelance
-            </label>
-            <input type="checkbox" id="internship" value="label" />
-            <label htmlFor="full time" className="job-rating">
-              Internship
-            </label>
-            <hr className="line" />
-            <h1 className="job-title">Salary Range</h1>
-            <input type="radio" id="10LPA" value="label" />
-            <label htmlFor="10LPA" className="job-rating">
-              10LPA and above
-            </label>
-            <input type="radio" id="20LPA" value="label" />
-            <label htmlFor="20LPA" className="job-rating">
-              20LPA and above
-            </label>
-            <input type="radio" id="30LPA" value="label" />
-            <label htmlFor="30LPA" className="job-rating">
-              30LPA and above
-            </label>
-            <input type="radio" id="40LPA" value="label" />
-            <label htmlFor="40LPA" className="job-rating">
-              40LPA and above
-            </label>
-          </div>
-          <div>
-            <input
-              type="search"
-              value={searchInput}
-              onChange={this.onChangeInput}
-              placeholder="Search"
-              className="search-1"
-            />
-            <div>
-              <ul>
-                {searchResult.map(item => (
-                  <JobProps Key={item.id} jobDetails={item} />
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
+        <ul>
+          {searchResult.map(item => (
+            <JobProps key={item.id} jobDetails={item} />
+          ))}
+        </ul>
+      </div>
+    ) : (
+      <div className="job-container">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
+          alt="no jobs"
+          className="failure-pic"
+        />
+        <h1 className="job-heading-1">No Jobs Found</h1>
+        <p className="job-subheading">
+          We could not find any jobs. Try other filters
+        </p>
+        <button
+          type="button"
+          className="bon"
+          onClick={() => this.getJobsList()}
+        >
+          Retry
+        </button>
       </div>
     )
   }
 
-  render() {
+  renderProductDetails = () => {
     const {apiStatus} = this.state
 
     switch (apiStatus) {
@@ -153,6 +134,60 @@ class Jobs extends Component {
       default:
         return null
     }
+  }
+
+  render() {
+    const {searchInput} = this.state
+    return (
+      <div className="job-container">
+        <Header />
+        <div className="main">
+          <div className="main-1">
+            <Pro />
+            <hr className="line" />
+            <div>
+              <h1 className="job-title">Type of Employment</h1>
+              <input type="checkbox" id="full time" value="checkbox1" />
+              <label htmlFor="full time" className="job-rating">
+                Full Time
+              </label>
+              <input type="checkbox" id="part time" value="checkbox2" />
+              <label htmlFor="part time" className="job-rating">
+                Part Time
+              </label>
+              <input type="checkbox" id="Freelance" value="checkbox3" />
+              <label htmlFor="Freelance" className="job-rating">
+                Freelance
+              </label>
+              <input type="checkbox" id="internship" value="checkbox4" />
+              <label htmlFor="internship" className="job-rating">
+                Internship
+              </label>
+            </div>
+            <hr className="line" />
+            <div>
+              <h1 className="job-title">Salary Range</h1>
+              <input type="radio" id="10LPA" name="salary" value="package10" />
+              <label htmlFor="10LPA" className="job-rating">
+                10LPA and above
+              </label>
+              <input type="radio" id="20LPA" name="salary" value="package20" />
+              <label htmlFor="20LPA" className="job-rating">
+                20LPA and above
+              </label>
+              <input type="radio" id="30LPA" name="salary" value="package30" />
+              <label htmlFor="30LPA" className="job-rating">
+                30LPA and above
+              </label>
+              <input type="radio" id="40LPA" name="salary" value="package40" />
+              <label htmlFor="40LPA" className="job-rating">
+                40LPA and above
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   }
 }
 
