@@ -85,9 +85,16 @@
   align-items: center;
 }
 
+.details1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .pp {
   height: 100px;
   width: 180px;
+  overflow-y: auto;
   border-radius: 5px;
 }
 
@@ -101,4 +108,9 @@
   width: 40px;
   margin-left: 25px;
   margin-top: 5px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
 }

@@ -196,7 +196,7 @@ class Jobs extends Component {
       {employmentTypesList.map(eachItem => (
         <li key={eachItem.employmentTypeId}>
           <input
-            className="input"
+            className="input1"
             id={eachItem.employmentTypeId}
             type="checkbox"
             onChange={this.onGetInputOption}
@@ -264,12 +264,12 @@ class Jobs extends Component {
             </ul>
           </div>
           <div className="employment">
-            <div className="search-icon">
+            <div className="search-input">
               <input
                 type="search"
                 placeholder="search"
                 onChange={this.onChangeInput}
-                className="search-input"
+                className="input1"
               />
               <button type="button" testid="searchButton" className="bro">
                 <AiOutlineSearch />
