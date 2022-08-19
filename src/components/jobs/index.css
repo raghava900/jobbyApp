@@ -17,6 +17,16 @@
   margin-top: 20px;
 }
 
+.input {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+}
+.input1 {
+  height: 20px;
+  width: 20px;
+}
+
 .search-1 {
   margin-top: 10px;
 }
@@ -70,8 +80,12 @@
 }
 
 .bro {
-  height: 20px;
-  width: 20px;
+  height: 34px;
+  width: 28px;
+  border: 1px solid grey;
+  background-color: grey;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .search-input {
@@ -80,13 +94,20 @@
   border: 2px solid grey;
   border-right: none;
   height: 40px;
-  width: 20vw;
-  border-radius: 10px;
-  border-bottom-left-radius: 10px;
+  width: 29vw;
+  border-radius: 5px;
   margin-bottom: 40px;
   margin-left: 40px;
   font-size: 20px;
   color: #ffffff;
+  display: flex;
+}
+
+.search-bar {
+  color: #ffffff;
+  width: 25vw;
+  border: none;
+  background-color: transparent;
 }
 
 .input1 {

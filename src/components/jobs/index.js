@@ -131,6 +131,16 @@ class Jobs extends Component {
     }
   }
 
+  onSubmitSearchInput = () => {
+    this.getJobsList()
+  }
+
+  onEnterSearchInput = event => {
+    if (event.key === 'Enter') {
+      this.getJobsList()
+    }
+  }
+
   renderFailureView = () => (
     <div className="job-container">
       <img
@@ -196,7 +206,7 @@ class Jobs extends Component {
       {employmentTypesList.map(eachItem => (
         <li key={eachItem.employmentTypeId}>
           <input
-            className="input1"
+            className="input"
             id={eachItem.employmentTypeId}
             type="checkbox"
             onChange={this.onGetInputOption}
@@ -244,6 +254,7 @@ class Jobs extends Component {
   }
 
   render() {
+    const {searchInput} = this.state
     return (
       <div className="job-container">
         <Header />
@@ -267,11 +278,18 @@ class Jobs extends Component {
             <div className="search-input">
               <input
                 type="search"
+                value={searchInput}
                 placeholder="search"
                 onChange={this.onChangeInput}
-                className="input1"
+                onKeyDown={this.onEnterSearchInput}
+                className="search-bar"
               />
-              <button type="button" testid="searchButton" className="bro">
+              <button
+                type="button"
+                testid="searchButton"
+                className="bro"
+                onClick={this.onSubmitSearchInput}
+              >
                 <AiOutlineSearch />
               </button>
             </div>
