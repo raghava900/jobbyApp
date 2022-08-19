@@ -1,10 +1,49 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import {AiOutlineSearch} from 'react-icons/ai'
 import Loader from 'react-loader-spinner'
 import Header from '../header'
 import Pro from '../pro'
 import JobProps from '../jobProps'
 import './index.css'
+
+const employmentTypesList = [
+  {
+    label: 'Full Time',
+    employmentTypeId: 'FULLTIME',
+  },
+  {
+    label: 'Part Time',
+    employmentTypeId: 'PARTTIME',
+  },
+  {
+    label: 'Freelance',
+    employmentTypeId: 'FREELANCE',
+  },
+  {
+    label: 'Internship',
+    employmentTypeId: 'INTERNSHIP',
+  },
+]
+
+const salaryRangesList = [
+  {
+    salaryRangeId: '1000000',
+    label: '10 LPA and above',
+  },
+  {
+    salaryRangeId: '2000000',
+    label: '20 LPA and above',
+  },
+  {
+    salaryRangeId: '3000000',
+    label: '30 LPA and above',
+  },
+  {
+    salaryRangeId: '4000000',
+    label: '40 LPA and above',
+  },
+]
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -18,6 +57,8 @@ class Jobs extends Component {
     apiStatus: apiStatusConstants.initial[0],
     jobList: [],
     searchInput: '',
+    radioInput: '',
+    checkboxInputs: [],
   }
 
   componentDidMount() {
@@ -31,7 +72,8 @@ class Jobs extends Component {
   getJobsList = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
     const jwtTokenJob = Cookies.get('jwt_token')
-    const jobsApiUrl = 'https://apis.ccbp.in/jobs'
+    const {checkboxInputs, radioInput, searchInput} = this.state
+    const jobsApiUrl = `https://apis.ccbp.in/jobs?employment_type=${checkboxInputs}&minimum_package=${radioInput}&search=${searchInput}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtTokenJob}`,
@@ -57,6 +99,35 @@ class Jobs extends Component {
       })
     } else {
       this.setState({apiStatus: apiStatusConstants.failure})
+    }
+  }
+
+  onGetRadioOption = event => {
+    this.setState({radioInput: event.target.id}, this.getJobsList)
+  }
+
+  onGetInputOption = event => {
+    const {checkboxInputs} = this.state
+    const inputNotInList = checkboxInputs.filter(
+      eachItem => eachItem === event.target.id,
+    )
+    if (inputNotInList.length === 0) {
+      this.setState(
+        prevState => ({
+          checkboxInputs: [...prevState.checkboxInputs, event.target.id],
+        }),
+        this.getJobsList,
+      )
+    } else {
+      const filteredData = checkboxInputs.filter(
+        eachItem => eachItem !== event.target.id,
+      )
+      this.setState(
+        prevState => ({
+          checkboxInputs: filteredData,
+        }),
+        this.onGetJobDetails,
+      )
     }
   }
 
@@ -91,7 +162,7 @@ class Jobs extends Component {
     const noJobs = searchResult.length > 0
 
     return noJobs ? (
-      <div className="job-container">
+      <div>
         <ul>
           {searchResult.map(item => (
             <JobProps key={item.id} jobDetails={item} />
@@ -99,7 +170,7 @@ class Jobs extends Component {
         </ul>
       </div>
     ) : (
-      <div className="job-container">
+      <div>
         <img
           src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
           alt="no jobs"
@@ -120,6 +191,43 @@ class Jobs extends Component {
     )
   }
 
+  onGetCheckBoxesView = () => (
+    <ul className="check-boxes-container">
+      {employmentTypesList.map(eachItem => (
+        <li key={eachItem.employmentTypeId}>
+          <input
+            className="input"
+            id={eachItem.employmentTypeId}
+            type="checkbox"
+            onChange={this.onGetInputOption}
+          />
+          <label className="job-rating" htmlFor={eachItem.employmentTypeId}>
+            {eachItem.label}
+          </label>
+        </li>
+      ))}
+    </ul>
+  )
+
+  onGetRadioButtonsView = () => (
+    <ul className="radio-button-container">
+      {salaryRangesList.map(eachItem => (
+        <li className="li-container" key={eachItem.salaryRangeId}>
+          <input
+            className="radio"
+            id={eachItem.salaryRangeId}
+            type="radio"
+            name="option"
+            onChange={this.onGetRadioOption}
+          />
+          <label className="job-rating" htmlFor={eachItem.salaryRangeId}>
+            {eachItem.label}
+          </label>
+        </li>
+      ))}
+    </ul>
+  )
+
   renderProductDetails = () => {
     const {apiStatus} = this.state
 
@@ -136,10 +244,6 @@ class Jobs extends Component {
   }
 
   render() {
-    const {searchInput, jobList} = this.state
-    const searchResult = jobList.filter(each =>
-      each.title.toLowerCase().includes(searchInput.toLowerCase()),
-    )
     return (
       <div className="job-container">
         <Header />
@@ -150,91 +254,28 @@ class Jobs extends Component {
             <ul>
               <li>
                 <h1 className="job-title">Type of Employment</h1>
-                <input type="checkbox" id="full time" value="checkbox1" />
-                <label htmlFor="full time" className="job-rating">
-                  Full Time
-                </label>
-              </li>
-              <li>
-                <input type="checkbox" id="part time" value="checkbox2" />
-                <label htmlFor="part time" className="job-rating">
-                  Part Time
-                </label>
-              </li>
-              <li>
-                <input type="checkbox" id="Freelance" value="checkbox3" />
-                <label htmlFor="Freelance" className="job-rating">
-                  Freelance
-                </label>
-              </li>
-              <li>
-                <input type="checkbox" id="internship" value="checkbox4" />
-                <label htmlFor="internship" className="job-rating">
-                  Internship
-                </label>
+                {this.onGetCheckBoxesView()}
               </li>
             </ul>
             <hr className="line" />
             <ul>
               <h1 className="job-title">Salary Range</h1>
-              <li>
-                <input
-                  type="radio"
-                  id="10LPA"
-                  name="salary"
-                  value="package10"
-                />
-                <label htmlFor="10LPA" className="job-rating">
-                  10LPA and above
-                </label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  id="20LPA"
-                  name="salary"
-                  value="package20"
-                />
-                <label htmlFor="20LPA" className="job-rating">
-                  20LPA and above
-                </label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  id="30LPA"
-                  name="salary"
-                  value="package30"
-                />
-                <label htmlFor="30LPA" className="job-rating">
-                  30LPA and above
-                </label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  id="40LPA"
-                  name="salary"
-                  value="package40"
-                />
-                <label htmlFor="40LPA" className="job-rating">
-                  40LPA and above
-                </label>
-              </li>
+              {this.onGetRadioButtonsView()}
             </ul>
           </div>
           <div className="employment">
-            <input
-              type="search"
-              placeholder="search"
-              onChange={this.onChangeInput}
-              className="search-icon"
-            />
-            <ul>
-              {searchResult.map(item => (
-                <JobProps key={item.id} jobDetails={item} />
-              ))}
-            </ul>
+            <div className="search-icon">
+              <input
+                type="search"
+                placeholder="search"
+                onChange={this.onChangeInput}
+                className="search-input"
+              />
+              <button type="button" testid="searchButton" className="bro">
+                <AiOutlineSearch />
+              </button>
+            </div>
+            {this.renderProductDetails()}
           </div>
         </div>
       </div>

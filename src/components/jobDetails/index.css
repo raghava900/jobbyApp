@@ -15,6 +15,19 @@
   border-radius: 10px;
 }
 
+.job-224 {
+  height: 330px;
+  width: 350px;
+  background-color: #272727;
+  margin: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.qq {
+}
+
 .job-33 {
   display: flex;
 }
@@ -22,6 +35,14 @@
 .icon {
   height: 50px;
   width: 50px;
+  margin: 10px;
+}
+
+.job-title-1 {
+  font-family: 'Roboto';
+  font-size: 20px;
+  color: white;
+  font-weight: 500;
   margin: 10px;
 }
 
@@ -62,4 +83,22 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.pp {
+  height: 100px;
+  width: 180px;
+  border-radius: 5px;
+}
+
+.life-at {
+  display: flex;
+  flex-direction: row;
+}
+
+.pp-1 {
+  height: 50px;
+  width: 40px;
+  margin-left: 25px;
+  margin-top: 5px;
 }

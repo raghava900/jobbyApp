@@ -38,7 +38,7 @@ class JobItemDetails extends Component {
     const response = await fetch(jobDetailsApiUrl, options)
     if (response.ok === true) {
       const data = await response.json()
-      const updatedData = data.job_details
+      const updatedData = data
       //   const updatedSkills = data.job_details.skills.map(item => (
       //     <p>{item.name}</p>
       //   ))

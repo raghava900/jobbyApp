@@ -22,9 +22,7 @@ const Header = props => {
       </Link>
       <ul className="list">
         <Link to="/">
-          <li>
-            <p className="text">Home</p>
-          </li>
+          <li className="text">Home</li>
         </Link>
         <Link to="/jobs">
           <li className="text">Jobs</li>
